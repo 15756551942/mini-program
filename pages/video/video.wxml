@@ -4,9 +4,22 @@
     <view class="serach">搜索音乐</view>
     <image src="/static/images/logo.png"></image>
   </view>
-  <scroll-view scroll-x class="navScroll" enable-flex>
-    <view class="navItem" wx:for="{{videoGroupList}}" wx:key="id">
+  <scroll-view scroll-x class="navScroll" enable-flex  scroll-into-view="{{'scroll' + navId}}" scroll-with-animation>
+    <view class="navItem" wx:for="{{videoGroupList}}" wx:key="id" id="{{'scroll' + item.id}}">
       <view class="navContent {{item.id === navId?'active':''}}" bindtap="changeNav" id="{{item.id}}">{{item.name}}</view>
+    </view>
+  </scroll-view>
+  <scroll-view scroll-y class="videoScroll">
+    <view class="videoItem" wx:for="{{videoList}}" wx:key="id">
+      <video 
+      src="{{item.data.urlInfo.url}}" 
+      bindplay="handlePlay" 
+      id="{{item.data.vid}}" 
+      poster="{{item.data.coverUrl}}" 
+      class="common" wx:if="{{videoId === item.data.vid}}"
+      objectFit="fill"
+      ></video>
+      <image src="{{item.data.coverUrl}}" class="common" bindtap="handlePlay" wx:else id="{{item.data.vid}}"></image>
     </view>
   </scroll-view>
 </view>

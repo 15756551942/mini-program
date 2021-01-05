@@ -43,7 +43,7 @@ Page({
     wx.showToast({
       title: '前端验证通过'
     })
-    request('/login/cellphone',{phone,password}).then((result) => {
+    request('/login/cellphone',{phone,password,isLogin:true}).then((result) => {
       // console.log(result)
       if(result.code === 200){
         wx.showToast({
